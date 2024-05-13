@@ -11,6 +11,8 @@ import Home from './Components/Home/Home';
 import Applied_jobs from './Components/Applied_jobs/Applied_jobs';
 import AddJobs from './Components/Add_a_job/AddJobs';
 import Myjobs from './Components/MyJobs/Myjobs';
+import Login from './Components/Login-registration/Login';
+import Registration from './Components/Login-registration/Registration';
 
 
 
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "/Add_a_job",
         element: <AddJobs></AddJobs>
+      },
+      {
+        path: "/Login",
+        element : <Login></Login>
+      },
+      {
+        path: "/Registration",
+        element: <Registration></Registration>
       }
     ]
   },

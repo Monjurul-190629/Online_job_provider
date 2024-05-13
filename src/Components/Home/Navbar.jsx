@@ -7,8 +7,11 @@ const Navbar = () => {
         <li><NavLink to="/Applied_jobs">Applied Jobs</NavLink></li>
         <li><NavLink to="/My_jobs">My Jobs</NavLink></li>
         <li><NavLink to="/Login">Login</NavLink></li>
-        <li><NavLink to="/Register">Register</NavLink></li>
+        <li><NavLink to="/Registration">Registration</NavLink></li>
     </>
+
+
+   
     return (
         <div className="mx-10 my-4">
             <div className="navbar">
@@ -47,6 +50,9 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                         {navLink}
                     </ul>
+                </div>
+                <div className='navbar-end'>
+          
                 </div>
 
             </div>
