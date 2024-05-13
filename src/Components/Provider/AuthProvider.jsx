@@ -1,28 +1,28 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import auth from "../../tailwind.config";
+import auth from "../../../firebase.config"
 
 
 
 
 export const AuthContext = createContext(null)
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
-    
-    
+
+
     ///create user
-    
+
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
-     }
-    
+    }
+
 
 
     ///sign in user
-    const signInuser = (email, password) =>{
+    const signInuser = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
@@ -32,11 +32,11 @@ const AuthProvider = ({children}) => {
     }
 
     /// authInfo
-    const authInfo = {user, createUser, signInuser, logOut}
-    
-     /// observe auth state change
-     useEffect(() => {
-        const unSubscribe =  onAuthStateChanged(auth, currentUser => {
+    const authInfo = { user, createUser, signInuser, logOut }
+
+    /// observe auth state change
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             console.log("Current value of the current user : ", currentUser)
         });
@@ -47,8 +47,8 @@ const AuthProvider = ({children}) => {
 
 
     return (
-        <AuthContext.Provider value = {authInfo}>
-           {children}
+        <AuthContext.Provider value={authInfo}>
+            {children}
         </AuthContext.Provider>
     );
 };
@@ -56,5 +56,5 @@ const AuthProvider = ({children}) => {
 export default AuthProvider;
 
 AuthProvider.propTypes = {
-    children : PropTypes.node,
+    children: PropTypes.node,
 }

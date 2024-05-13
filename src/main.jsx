@@ -13,6 +13,7 @@ import AddJobs from './Components/Add_a_job/AddJobs';
 import Myjobs from './Components/MyJobs/Myjobs';
 import Login from './Components/Login-registration/Login';
 import Registration from './Components/Login-registration/Registration';
+import AuthProvider from './Components/Provider/AuthProvider';
 
 
 
@@ -60,6 +61,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+       <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )

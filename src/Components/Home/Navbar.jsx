@@ -1,4 +1,7 @@
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from "../Provider/AuthProvider";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
     const navLink = <>
@@ -6,12 +9,30 @@ const Navbar = () => {
         <li><NavLink to="/All_jobs">All Jobs</NavLink></li>
         <li><NavLink to="/Applied_jobs">Applied Jobs</NavLink></li>
         <li><NavLink to="/My_jobs">My Jobs</NavLink></li>
-        <li><NavLink to="/Login">Login</NavLink></li>
-        <li><NavLink to="/Registration">Registration</NavLink></li>
+
     </>
 
+    /// user logout
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogout = () => {
+        logOut()
+            .then(() => console.log("log out successfully"))
+            .catch((error) => console.log(error.message))
+    }
 
-   
+    // user profile
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
+
+
     return (
         <div className="mx-10 my-4">
             <div className="navbar">
@@ -30,7 +51,7 @@ const Navbar = () => {
                                 <img src="https://png.pngtree.com/element_pic/16/11/02/bd886d7ccc6f8dd8db17e841233c9656.jpg" className='' />
                             </div>
                             <div>
-                                <p className='text-2xl font-bold text-purple-800'>SkillTrackers</p>
+                                <p className='text-xl md:text-2xl font-bold text-purple-800'>SkillTrackers</p>
 
                             </div>
                         </div>
@@ -39,7 +60,7 @@ const Navbar = () => {
                         <div className='flex items-center'>
                             <img src="https://png.pngtree.com/element_pic/16/11/02/bd886d7ccc6f8dd8db17e841233c9656.jpg" className='w-2/3' />
                             <div>
-                                <p className='text-2xl font-bold text-purple-800'>SkillTrackers</p>
+                                <p className='text-xl md:text-2xl font-bold text-purple-800'>SkillTrackers</p>
 
                             </div>
                         </div>
@@ -52,7 +73,27 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className='navbar-end'>
-          
+                    {
+                        user ? <>
+                            <div className="tooltip  hover:tooltip-open" data-tip={user.displayName}>
+                                <span><img src={user.photoURL} className="ml-12 w-1/3 md:w-1/4" /></span>
+                            </div>
+
+                            <a onClick={handleLogout} className="btn btn-sm">Log out</a>
+                        </> :
+                            <>
+                                <div className="relative text-center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                                    <p className='text-4xl'><FaUserCircle /></p>
+                                    {isHovered && (
+                                        <ul className=" bg-purple-700 rounded-lg p-5 right-0 absolute font-bold text-white">
+                                            <li className='hover:bg-gray-400 hover:p-1 hover:rounded-lg hover:text-black my-2'><NavLink to="/Login">Login</NavLink></li>
+                                            <hr/>
+                                            <li className='hover:bg-gray-400 hover:p-1 hover:rounded-lg hover:text-black my-2'><NavLink to="/Registration">Registration</NavLink></li>
+                                        </ul>
+                                    )}
+                                </div>
+                            </>
+                    }
                 </div>
 
             </div>

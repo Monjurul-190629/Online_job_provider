@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toast";
+import { AuthContext } from "../Provider/AuthProvider";
 
 
 const Registration = () => {
-
+    const {createUser} = useContext(AuthContext);
 
     const handleRegistration = e => {
         e.preventDefault();
@@ -13,7 +15,7 @@ const Registration = () => {
         const password = e.target.password.value;
         console.log(email, password, name, photourl);
 
-        /// password verification
+        /// password verify
 
         if (!/[A-Z]/.test(password)) {
             toast("Password should have one uppercase letter.")
@@ -29,6 +31,18 @@ const Registration = () => {
         }
 
 
+        //// create new user
+        //// create user
+        createUser(email, password)
+          .then(result => {
+            console.log(result.user)
+            toast("Registered succesfullly")
+          })
+          .catch(error => {
+            toast(error.message)
+          })
+
+
 
 
 
@@ -41,7 +55,7 @@ const Registration = () => {
             <div className="hero min-h-screen">
 
                 <div className="hero-content flex-col lg:flex-row-reverse ">
-                    <div className="card shrink-0 w-full max-w-md shadow-2xl bg-purple-600 px-20 py-10">
+                    <div className="card shrink-0 w-full max-w-md shadow-2xl bg-purple-600 px-5 md:px-20 py-10">
                         <form className="card-body text-white font-bold" onSubmit={handleRegistration}>
                             <h1 className="text-3xl underline font-bold text-center my-5">Registration</h1>
                             <div className="form-control">
