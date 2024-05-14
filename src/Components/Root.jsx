@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Home/Navbar";
 import { useState } from "react";
+import Footer from "./Home/Footer";
 
 
 const Root = () => {
@@ -17,6 +18,7 @@ const Root = () => {
 
             <Navbar darkMode = {darkMode} toggleTheme = {toggleTheme}></Navbar>
             <Outlet></Outlet>
+            <Footer darkMode = {darkMode}></Footer>
 
         </div>
     );
