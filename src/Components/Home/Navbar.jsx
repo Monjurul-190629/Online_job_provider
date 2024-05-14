@@ -2,8 +2,11 @@ import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaUserCircle } from "react-icons/fa";
+import { MdNightlight } from "react-icons/md";
+import { MdOutlineDarkMode } from "react-icons/md";
 
-const Navbar = () => {
+
+const Navbar = ({ darkMode, toggleTheme }) => {
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/All_jobs">All Jobs</NavLink></li>
@@ -33,6 +36,8 @@ const Navbar = () => {
 
 
 
+
+
     return (
         <div className="mx-10 my-4">
             <div className="navbar">
@@ -51,7 +56,7 @@ const Navbar = () => {
                                 <img src="https://png.pngtree.com/element_pic/16/11/02/bd886d7ccc6f8dd8db17e841233c9656.jpg" className='' />
                             </div>
                             <div>
-                                <p className='text-xl md:text-2xl font-bold text-purple-800'>SkillTrackers</p>
+                                <p className = {`${darkMode ? 'text-blue-700' : 'text-purple-800'} text-xl md:text-2xl font-bold`}>SkillTrackers</p>
 
                             </div>
                         </div>
@@ -70,11 +75,15 @@ const Navbar = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {navLink}
+                        <button onClick={toggleTheme} className="bg-blue-500 hover:bg-black-700 text-white font-bold py-2 px-4 rounded">
+                            {darkMode ? <MdOutlineDarkMode /> : <MdNightlight />}
+                        </button>
                     </ul>
                 </div>
                 <div className='navbar-end'>
                     {
                         user ? <>
+
                             <div className="tooltip  hover:tooltip-open" data-tip={user.displayName}>
                                 <span><img src={user.photoURL} className="ml-12 w-1/3 md:w-1/4" /></span>
                             </div>
@@ -82,12 +91,13 @@ const Navbar = () => {
                             <a onClick={handleLogout} className="btn btn-sm">Log out</a>
                         </> :
                             <>
+
                                 <div className="relative text-center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                    <p className='text-4xl'><FaUserCircle /></p>
+                                    <p className='text-4xl text-blue-600'><FaUserCircle /></p>
                                     {isHovered && (
                                         <ul className=" bg-purple-700 rounded-lg p-5 right-0 absolute font-bold text-white">
                                             <li className='hover:bg-gray-400 hover:p-1 hover:rounded-lg hover:text-black my-2'><NavLink to="/Login">Login</NavLink></li>
-                                            <hr/>
+                                            <hr />
                                             <li className='hover:bg-gray-400 hover:p-1 hover:rounded-lg hover:text-black my-2'><NavLink to="/Registration">Registration</NavLink></li>
                                         </ul>
                                     )}
