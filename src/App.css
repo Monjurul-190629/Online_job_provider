@@ -1,3 +1,9 @@
+@import 'swiper/swiper.min.css';
+@import 'swiper/components/navigation/navigation.min.css';
+@import 'swiper/components/pagination/pagination.min.css';
+
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
