@@ -14,6 +14,7 @@ import Myjobs from './Components/MyJobs/Myjobs';
 import Login from './Components/Login-registration/Login';
 import Registration from './Components/Login-registration/Registration';
 import AuthProvider from './Components/Provider/AuthProvider';
+import Alljobs from './Components/All_Jobs/Alljobs';
 
 
 
@@ -40,7 +41,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/All_jobs",
-        element: "/Alljobs"
+        element: <Alljobs></Alljobs>,
+        loader : () => fetch("http://localhost:5000/jobs")
       },
       {
         path: "/Add_a_job",
