@@ -17,6 +17,7 @@ import AuthProvider from './Components/Provider/AuthProvider';
 import Alljobs from './Components/All_Jobs/Alljobs';
 import ViewDetails from './Components/All_Jobs/ViewDetails';
 import PrivateRoute from './Components/Provider/PrivateRoute';
+import Update from './Components/MyJobs/Update';
 
 
 
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/My_jobs",
-        element : <Myjobs></Myjobs>
+        element : <PrivateRoute><Myjobs></Myjobs></PrivateRoute>
       },
       {
         path: "/All_jobs",
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
       {
         path: "/Registration",
         element: <Registration></Registration>
+      },
+      {
+        path: "/update",
+        element : <Update></Update>,
+        loader : ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       }
     ]
   },
