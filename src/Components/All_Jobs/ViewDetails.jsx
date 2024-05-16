@@ -21,7 +21,8 @@ const ViewDetails = () => {
         Salary_range,
         Job_description,
         Job_applicants_number,
-        applicationDeadline } = job;
+        applicationDeadline,
+        jobCategory } = job;
 
     
 
@@ -46,7 +47,8 @@ const ViewDetails = () => {
             Job_title,
             Salary_range,
             Job_description,
-            resumeLink
+            resumeLink,
+            jobCategory,
 
         }
         console.log(data1)
