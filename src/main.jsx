@@ -15,6 +15,8 @@ import Login from './Components/Login-registration/Login';
 import Registration from './Components/Login-registration/Registration';
 import AuthProvider from './Components/Provider/AuthProvider';
 import Alljobs from './Components/All_Jobs/Alljobs';
+import ViewDetails from './Components/All_Jobs/ViewDetails';
+import PrivateRoute from './Components/Provider/PrivateRoute';
 
 
 
@@ -42,6 +44,11 @@ const router = createBrowserRouter([
       {
         path: "/All_jobs",
         element: <Alljobs></Alljobs>,
+        loader : () => fetch("http://localhost:5000/jobs")
+      },
+      {
+        path: "ViewDetails/:id",
+        element : <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
         loader : () => fetch("http://localhost:5000/jobs")
       },
       {

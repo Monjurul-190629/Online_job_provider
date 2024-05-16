@@ -60,7 +60,7 @@ const AddJobs = () => {
                 if (data.insertedId) {
                     swal.fire({
                         title: 'Success!',
-                        text: 'new spot added successfully',
+                        text: 'new job added successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
 
