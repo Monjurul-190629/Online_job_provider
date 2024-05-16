@@ -1,7 +1,7 @@
-
 import 'react-datepicker/dist/react-datepicker.css';
 import { useLoaderData } from 'react-router-dom';
-import swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
 
 
 
@@ -9,14 +9,14 @@ const Update = () => {
 
     const job = useLoaderData();
 
-    const {Banner_url,
+    const { Banner_url,
         Job_title,
         name,
         email,
         Salary_range,
         Job_description,
         Job_posting_date,
-        Job_applicants_number} = job;
+        Job_applicants_number, _id } = job;
 
 
     const handleUpdate = e => {
@@ -37,11 +37,9 @@ const Update = () => {
             Job_title,
             name,
             email,
-            jobCategory,
             Salary_range,
             Job_description,
             Job_posting_date,
-            applicationDeadline,
             Job_applicants_number
 
         }
@@ -49,8 +47,9 @@ const Update = () => {
         console.log(about_job)
 
         ////// fetch
-        fetch("http://localhost:5000/jobs", {
-            method: "POST",
+        ////// fetch
+        fetch(`http://localhost:5000/jobs/${_id}`, {
+            method: "PUT",
             headers: {
                 "content-type": "application/json",
             },
@@ -59,16 +58,16 @@ const Update = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (data.insertedId) {
-                    swal.fire({
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
                         title: 'Success!',
-                        text: 'new job added successfully',
+                        text: 'Updated successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
-
                     })
                 }
             })
+
 
     }
 
@@ -107,7 +106,7 @@ const Update = () => {
                                     </label>
                                     <input type="email" name="email" placeholder="email" defaultValue={email} className="input input-bordered text-black" required />
                                 </div>
-                                
+
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text text-white">Salary range</span>
@@ -129,12 +128,12 @@ const Update = () => {
                                     <input type="date" name="Job_posting_date" className="input input-bordered text-black" defaultValue={Job_posting_date} required />
 
                                 </div>
-                                
+
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text text-white">Job Applicants Number</span>
                                     </label>
-                                    <input type="text" name="Job_application_number" placeholder="Applicants Number" defaultValue = {Job_applicants_number} defaultValue={0} className="input input-bordered text-black" required />
+                                    <input type="text" name="Job_application_number" placeholder="Applicants Number" defaultValue={Job_applicants_number} defaultValue={0} className="input input-bordered text-black" required />
 
                                 </div>
                             </div>
