@@ -13,6 +13,8 @@ const Navbar = ({ darkMode, toggleTheme }) => {
         <li><NavLink to="/Applied_jobs">Applied Jobs</NavLink></li>
         <li><NavLink to = "/Add_a_job">Add a Job</NavLink></li>
         <li><NavLink to="/My_jobs">My Jobs</NavLink></li>
+        <li><NavLink to="/Blog">Blog</NavLink></li>
+        <li><NavLink to = "Not_Founded_Page">Not_Founded_Page</NavLink></li>
 
     </>
 

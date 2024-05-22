@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Table_1 from "./Table_1";
+import Swal from "sweetalert2";
 
 const Myjobs = () => {
     const { user } = useContext(AuthContext);
    
     const [jobs, setJobs] = useState([]);
-
-    const [jobes, setJobes] = useState([]);
 
     const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -21,21 +20,31 @@ const Myjobs = () => {
 
 
     const handleDelete = id => {
-        const proceed = confirm('Are You sure you want to delete');
-        if (proceed) {
-            fetch(`http://localhost:5000/jobs/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.deletedCount > 0) {
-                        alert('deleted successful');
-                        const remaining = bookings.filter(booking => booking._id !== id);
-                        setJobs(remaining);
-                    }
+        Swal.fire({
+            title: 'Are you sure to want to delete?',
+            text: 'You will not be able to recover this job!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform delete action
+                fetch(`http://localhost:5000/jobs/${id}`, {
+                    method: 'DELETE'
                 })
-        }
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            const remaining = jobs.filter(job => job._id !== id);
+                            setJobs(remaining);
+                        }
+                    })
+            }
+        });
+
     }
     return (
         <div>
@@ -54,7 +63,7 @@ const Myjobs = () => {
                         </thead>
                         <tbody className="flex flex-col justify-center items-center mb-10">
                             {
-                                jobs.map(job => <Table_1 key={job._id} job={job} handleDelete = {handleDelete}></Table_1>)
+                                jobs.map(job => <Table_1 key={job._id}  job={job} handleDelete = {handleDelete}></Table_1>)
                             }
                         </tbody>
                     </table>

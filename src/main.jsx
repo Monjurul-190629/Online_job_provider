@@ -18,6 +18,8 @@ import Alljobs from './Components/All_Jobs/Alljobs';
 import ViewDetails from './Components/All_Jobs/ViewDetails';
 import PrivateRoute from './Components/Provider/PrivateRoute';
 import Update from './Components/MyJobs/Update';
+import Blog from './Components/Blog/Blog';
+import Not_Founded_Page from './Components/Blog/Not_Founded_Page';
 
 
 
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/Add_a_job",
-        element: <AddJobs></AddJobs>
+        element: <PrivateRoute><AddJobs></AddJobs></PrivateRoute>
       },
       {
         path: "/Login",
@@ -65,9 +67,17 @@ const router = createBrowserRouter([
         element: <Registration></Registration>
       },
       {
+        path: "/Blog",
+        element: <Blog></Blog>
+      },
+      {
         path: "/update/:id",
         element : <Update></Update>,
         loader : ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+      },
+      {
+        path: "Not_Founded_Page",
+        element: <Not_Founded_Page></Not_Founded_Page>
       }
     ]
   },
