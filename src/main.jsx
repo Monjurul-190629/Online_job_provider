@@ -23,6 +23,7 @@ import Not_Founded_Page from './Components/Blog/Not_Founded_Page';
 
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,12 +76,13 @@ const router = createBrowserRouter([
         element : <Update></Update>,
         loader : ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       },
-      {
-        path: "Not_Founded_Page",
-        element: <Not_Founded_Page></Not_Founded_Page>
-      }
+      
     ]
   },
+  {
+    path: "*",
+    element: <Not_Founded_Page></Not_Founded_Page>
+  }
 ]);
 
 
