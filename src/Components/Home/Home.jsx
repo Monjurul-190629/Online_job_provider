@@ -4,6 +4,9 @@ import 'swiper/css';
 import { useEffect, useRef, useState } from 'react';
 import './App.css'
 
+// framer -motion
+import { motion } from 'framer-motion'
+
 
 
 
@@ -68,8 +71,38 @@ const Home = () => {
                     <div className="banner-overlay"></div>
                 </SwiperSlide>
 
-               
+
             </Swiper>
+
+            <div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5 }}
+                    className="p-8  rounded-lg shadow-lg"
+                >
+                    <div className="md:px-20 px-4 py-10 bg-purple-600 rounded-xl text-white text-justify">
+                        <div className="flex flex-col lg:flex-row-reverse gap-5 md:gap-10 md:justify-center">
+                            <div className='md:flex-1'>
+                                <img src="https://www.dice.com/binaries/large/content/gallery/dice/insights/2022/09/shutterstock_2079730714.jpg" className="max-w-full rounded-lg shadow-2xl" />
+                            </div>
+                            <div className='md:flex-1'>
+                                
+                                <p className="py-6">
+                                  <span className='text-3xl font-bold text-red-300'>SkillTrackers</span> is an innovative job-seeking website designed to connect 
+                                  job seekers with potential employers efficiently and effectively. 
+                                  The platform offers a comprehensive range of tools to enhance the job search experience,
+                                   including personalized job recommendations, resume building assistance, and skill assessments
+                                    to highlight candidates' strengths. With an intuitive interface and advanced search filters, 
+                                    users can easily navigate through various job listings tailored to their career goals and expertise.
+                                    SkillTrackers also provides valuable resources such as interview preparation tips and career advice articles,
+                                     making it a one-stop solution for individuals striving to advance their professional journey.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
         </div>
 
     );
